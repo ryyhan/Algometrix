@@ -1,9 +1,16 @@
+import pytest
+from Algometrix.problem_types import Ptype
+
+
 def test_Ptype():
-    ...
+    assert Ptype("reg") == "reg"
+    assert Ptype("class") == "class"
 
-
-def main():
-    ...
-
-if __name__ == "__main__":
-    main()
+    with pytest.raises(TypeError):
+        Ptype(1)
+        Ptype(-9)
+        Ptype(0)
+        Ptype("Classification")
+        Ptype("Regression")
+        Ptype("Clustering")
+        Ptype("@")
