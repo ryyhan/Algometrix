@@ -6,16 +6,16 @@ from classification_models import classification_models
 
 def algometrix(X_train, X_test, y_train, y_test, prob_type="none", algorithms="none", metrics="none", cross_validation=False):
     
-    algorithm_selection(prob_type,algorithms)
+    algorithm_selection(X_train, X_test, y_train, y_test,prob_type,algorithms)
 
 
-def algorithm_selection(prob_type,algorithms):
+def algorithm_selection(X_train, X_test, y_train, y_test,prob_type,algorithms):
 
     prob_type = Ptype(prob_type)
     print(prob_type)
     print(algorithms)
 
     if prob_type == "reg":
-        regression_models(algorithms)
+        regression_models(X_train, X_test, y_train, y_test,algorithms)
     elif prob_type == "class":
-        classification_models(algorithms)
+        classification_models(X_train, X_test, y_train, y_test,algorithms)
