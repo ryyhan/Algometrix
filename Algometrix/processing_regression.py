@@ -66,7 +66,7 @@ models = [
 ]
 
 
-# regression
+# Model Fitting
 ardr = linear_model.ARDRegression()
 adbr = AdaBoostRegressor(random_state=0, n_estimators=50)
 brr = linear_model.BayesianRidge()
@@ -141,7 +141,6 @@ def train_regressor(reg, X_train, y_train, X_test, y_test):
     msle = mean_squared_log_error(y_test, y_pred, squared=True)
     med_ae = median_absolute_error(y_test, y_pred)
 
-
     return r2score, mse, rmse, mae, mape, rmsle, msle, med_ae
 
 
@@ -156,7 +155,17 @@ def results(X_train, X_test, y_train, y_test):
     med_ae = []
 
     for name, reg in regs.items():
-        current_r2, current_mse, current_rmse, current_mae, current_mape, current_rmsle, current_msle, current_med_ae = train_regressor(reg, X_train, y_train, X_test, y_test)
+        (
+            current_r2,
+            current_mse,
+            current_rmse,
+            current_mae,
+            current_mape,
+            current_rmsle,
+            current_msle,
+            current_med_ae,
+        ) = train_regressor(reg, X_train, y_train, X_test, y_test)
+        
         r2_scores.append(current_r2)
         mse.append(current_mse)
         rmse.append(current_rmse)
@@ -167,6 +176,16 @@ def results(X_train, X_test, y_train, y_test):
         med_ae.append(current_med_ae)
 
     performance_df = pd.DataFrame(
-        {"Algorithm": regs.keys(), "R2Score": r2_scores, "MSE": mse, "RMSE": rmse,"MAE": mae, "MAPE": mape, "RMSLE": rmsle, "MSLE": msle, "MedAE": med_ae}
+        {
+            "Algorithm": regs.keys(),
+            "R2Score": r2_scores,
+            "MSE": mse,
+            "RMSE": rmse,
+            "MAE": mae,
+            "MAPE": mape,
+            "RMSLE": rmsle,
+            "MSLE": msle,
+            "MedAE": med_ae,
+        }
     )
     print(performance_df)
