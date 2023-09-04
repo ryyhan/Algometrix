@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 
 from sklearn.metrics import accuracy_score
@@ -80,24 +79,22 @@ clfs = {
 }
 
 
-def train_classifier(clf, X_train, y_train, X_test, y_test):
+
+def train_classifier_multiclass(clf, X_train, y_train, X_test, y_test):
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
     accuracy = accuracy_score(y_test, y_pred)
-    precision = precision_score(y_test, y_pred, average="micro")  # for multiclass
-    recall = recall_score(y_test, y_pred, average="micro")  # for multiclass
-    f1 = f1_score(y_test, y_pred, average="micro")  # for multiclass
+    precision = precision_score(y_test, y_pred, average="micro")
+    recall = recall_score(y_test, y_pred, average="micro")
+    f1 = f1_score(y_test, y_pred, average="micro")
     jaccard = jaccard_score(y_test, y_pred, average="micro")
     matthews = matthews_corrcoef(y_test, y_pred)
-
-    #for binary classification
-
 
     return accuracy, precision, recall, f1, jaccard, matthews
 
 
-def results(X_train, X_test, y_train, y_test):
+def results_multiclass(X_train, X_test, y_train, y_test):
     accuracy_scores = []
     precision_scores = []
     recall_scores = []
@@ -113,7 +110,7 @@ def results(X_train, X_test, y_train, y_test):
             current_f1,
             current_jaccard,
             current_matthews,
-        ) = train_classifier(clf, X_train, y_train, X_test, y_test)
+        ) = train_classifier_multiclass(clf, X_train, y_train, X_test, y_test)
         accuracy_scores.append(current_accuracy)
         precision_scores.append(current_precision)
         recall_scores.append(current_recall)
@@ -133,3 +130,65 @@ def results(X_train, X_test, y_train, y_test):
         }
     )
     print(performance_df)
+
+
+def train_classifier_binary(clf, X_train, y_train, X_test, y_test):
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred, average="micro")
+    recall = recall_score(y_test, y_pred, average="micro")
+    f1 = f1_score(y_test, y_pred, average="micro")
+    jaccard = jaccard_score(y_test, y_pred, average="micro")
+    matthews = matthews_corrcoef(y_test, y_pred)
+
+    return accuracy, precision, recall, f1, jaccard, matthews
+
+
+def results_binary(X_train, X_test, y_train, y_test):
+    accuracy_scores = []
+    precision_scores = []
+    recall_scores = []
+    f1_scores = []
+    jaccard_scores = []
+    matthews_scores = []
+
+    for name, clf in clfs.items():
+        (
+            current_accuracy,
+            current_precision,
+            current_recall,
+            current_f1,
+            current_jaccard,
+            current_matthews,
+        ) = train_classifier_binary(clf, X_train, y_train, X_test, y_test)
+        accuracy_scores.append(current_accuracy)
+        precision_scores.append(current_precision)
+        recall_scores.append(current_recall)
+        f1_scores.append(current_f1)
+        jaccard_scores.append(current_jaccard)
+        matthews_scores.append(current_matthews)
+
+    performance_df = pd.DataFrame(
+        {
+            "Algorithm": clfs.keys(),
+            "Accuracy": accuracy_scores,
+            "Precision": precision_scores,
+            "Recall": recall_scores,
+            "F1-Score": f1_scores,
+            "Jaccard": jaccard_scores,
+            "Matthews Score": matthews_scores,
+        }
+    )
+    print(performance_df)
+
+
+
+
+def process(X_train, X_test, y_train, y_test, classification_type):
+    if classification_type == "multiclass":
+        results_multiclass(X_train, X_test, y_train, y_test)
+
+    if classification_type == "binary":
+        results_binary(X_train, X_test, y_train, y_test)
