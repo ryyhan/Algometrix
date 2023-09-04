@@ -2,6 +2,12 @@ import numpy as np
 import pandas as pd
 
 from sklearn import metrics
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_log_error
+from sklearn.metrics import median_absolute_error
 
 from sklearn import linear_model
 from sklearn.ensemble import AdaBoostRegressor
@@ -126,20 +132,41 @@ regs = {
 def train_regressor(reg, X_train, y_train, X_test, y_test):
     reg.fit(X_train, y_train)
     y_pred = reg.predict(X_test)
-    accuracy = metrics.r2_score(y_test, y_pred)
-    # precision = precision_score(y_test,y_pred)
+    r2score = metrics.r2_score(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred, squared=True)
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+    mae = mean_absolute_error(y_test, y_pred)
+    mape = mean_absolute_percentage_error(y_test, y_pred)
+    rmsle = mean_squared_log_error(y_test, y_pred, squared=False)
+    msle = mean_squared_log_error(y_test, y_pred, squared=True)
+    med_ae = median_absolute_error(y_test, y_pred)
 
-    return accuracy
+
+    return r2score, mse, rmse, mae, mape, rmsle, msle, med_ae
 
 
 def results(X_train, X_test, y_train, y_test):
-    accuracy_scores = []
+    r2_scores = []
+    mse = []
+    rmse = []
+    mae = []
+    mape = []
+    rmsle = []
+    msle = []
+    med_ae = []
 
     for name, reg in regs.items():
-        current_accuracy = train_regressor(reg, X_train, y_train, X_test, y_test)
-        accuracy_scores.append(current_accuracy)
+        current_r2, current_mse, current_rmse, current_mae, current_mape, current_rmsle, current_msle, current_med_ae = train_regressor(reg, X_train, y_train, X_test, y_test)
+        r2_scores.append(current_r2)
+        mse.append(current_mse)
+        rmse.append(current_rmse)
+        mae.append(current_mae)
+        mape.append(current_mape)
+        rmsle.append(current_rmsle)
+        msle.append(current_msle)
+        med_ae.append(current_med_ae)
 
     performance_df = pd.DataFrame(
-        {"Algorithm": regs.keys(), "Accuracy": accuracy_scores}
+        {"Algorithm": regs.keys(), "R2Score": r2_scores, "MSE": mse, "RMSE": rmse,"MAE": mae, "MAPE": mape, "RMSLE": rmsle, "MSLE": msle, "MedAE": med_ae}
     )
     print(performance_df)
