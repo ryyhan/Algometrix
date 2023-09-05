@@ -22,7 +22,17 @@ from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import RidgeClassifier
+from sklearn.linear_model import RidgeClassifierCV
+from sklearn.linear_model import Perceptron
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.multiclass import OutputCodeClassifier
+from sklearn.neural_network import MLPClassifier
+from sklearn.linear_model import LogisticRegressionCV
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.dummy import DummyClassifier
 
+import warnings
+warnings.filterwarnings("ignore")
 
 models = [
     "AdaBoostClassifier",
@@ -39,7 +49,15 @@ models = [
     "QuadraticDiscriminantAnalysis",
     "RandomForestClassifier",
     "RidgeClassifier",
+    "RidgeClassifierCV",
     "SVC",
+    "Perceptron",
+    "PassiveAgressiveClassifier",
+    "OutputCodeClassifier",
+    "MLPClassifier",
+    "LogisticRegressionCV",
+    "LinearDiscriminantAnalysis",
+    "DummyClassifier"
 ]
 
 
@@ -50,15 +68,22 @@ bnb = BernoulliNB(force_alpha=True)
 gnb = GaussianNB()
 dtc = DecisionTreeClassifier(max_depth=5)
 lrc = LogisticRegression(solver="liblinear", penalty="l1")
-rfc = RandomForestClassifier(n_estimators=50, random_state=2)
-abc = AdaBoostClassifier(n_estimators=50, random_state=2)
-bc = BaggingClassifier(n_estimators=50, random_state=2)
-etc = ExtraTreesClassifier(n_estimators=50, random_state=2)
-gbdt = GradientBoostingClassifier(n_estimators=50, random_state=2)
+rfc = RandomForestClassifier(n_estimators=50, random_state=42)
+abc = AdaBoostClassifier(n_estimators=50, random_state=42)
+bc = BaggingClassifier(n_estimators=50, random_state=42)
+etc = ExtraTreesClassifier(n_estimators=50, random_state=42)
+gbdt = GradientBoostingClassifier(n_estimators=50, random_state=42)
 qdc = QuadraticDiscriminantAnalysis()
 rc = RidgeClassifier()
+rcv = RidgeClassifierCV(alphas=[1e-3, 1e-2, 1e-1, 1])
 hgb = HistGradientBoostingClassifier()
-
+per = Perceptron(tol=1e-3, random_state=0)
+pac = PassiveAggressiveClassifier(max_iter=50, random_state=42)
+occ = OutputCodeClassifier(estimator=RandomForestClassifier(random_state=0),random_state=42)
+mlpc = MLPClassifier(random_state=42, max_iter=50)
+lgcv = LogisticRegressionCV(cv=5, random_state=42)
+lda = LinearDiscriminantAnalysis()
+dummy = DummyClassifier(strategy="most_frequent")
 
 clfs = {
     "SVC": svc,
@@ -76,6 +101,15 @@ clfs = {
     "QuadraticDiscriminantAnalysis": qdc,
     "RandomForestClassifier": rfc,
     "RidgeClassifier": rc,
+    "RidgeClassifierCV": rcv, 
+    "Perceptron": per,
+    "PassiveAgressiveClassifier": pac,
+    "OutputCodeClassifier": occ,
+    "MLPClassifier" : mlpc,
+    "LogisticRegressionCV" : lgcv,
+    "LinearDiscriminantAnalysis" : lda,
+    "DummyClassifer" : dummy,
+
 }
 
 
