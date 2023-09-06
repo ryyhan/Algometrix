@@ -33,6 +33,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.linear_model import TheilSenRegressor
 
+import warnings
+warnings.filterwarnings("ignore")
 
 models = [
     "ARDRegression",
