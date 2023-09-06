@@ -164,7 +164,7 @@ def results_multiclass(X_train, X_test, y_train, y_test):
             "Matthews Score": matthews_scores,
         }
     )
-    print(performance_df)
+    return performance_df
 
 
 def train_classifier_binary(clf, X_train, y_train, X_test, y_test):
@@ -216,12 +216,12 @@ def results_binary(X_train, X_test, y_train, y_test):
             "Matthews Score": matthews_scores,
         }
     )
-    print(performance_df)
+    return performance_df
 
 
 def process(X_train, X_test, y_train, y_test, classification_type):
     if classification_type == "multiclass":
-        results_multiclass(X_train, X_test, y_train, y_test)
+        return results_multiclass(X_train, X_test, y_train, y_test)
 
     if classification_type == "binary":
-        results_binary(X_train, X_test, y_train, y_test)
+        return results_binary(X_train, X_test, y_train, y_test)

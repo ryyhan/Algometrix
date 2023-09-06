@@ -2,11 +2,12 @@ from processing_classification import process
 import numpy as np
 import pandas as pd
 
-
+"""
 def classification_models(
     X_train, X_test, y_train, y_test, algorithms, classification_type
 ):
     validation(X_train, X_test, y_train, y_test, algorithms, classification_type)
+"""
 
 
 def validation(X_train, X_test, y_train, y_test, algorithms, classification_type):
@@ -22,6 +23,6 @@ def validation(X_train, X_test, y_train, y_test, algorithms, classification_type
         elif algorithms == "all" and (
             classification_type == "binary" or classification_type == "multi"
         ):
-            process(X_train, X_test, y_train, y_test, classification_type)
+            return process(X_train, X_test, y_train, y_test)
     else:
-        process(X_train, X_test, y_train, y_test, classification_type)
+        return process(X_train, X_test, y_train, y_test)
