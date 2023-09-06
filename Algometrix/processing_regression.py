@@ -190,4 +190,6 @@ def results(X_train, X_test, y_train, y_test):
             "MedAE": med_ae,
         }
     )
-    print(performance_df)
+    #print(performance_df)
+
+    return performance_df
