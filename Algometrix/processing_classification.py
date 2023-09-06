@@ -32,6 +32,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.dummy import DummyClassifier
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
 models = [
@@ -57,7 +58,7 @@ models = [
     "MLPClassifier",
     "LogisticRegressionCV",
     "LinearDiscriminantAnalysis",
-    "DummyClassifier"
+    "DummyClassifier",
 ]
 
 
@@ -79,7 +80,9 @@ rcv = RidgeClassifierCV(alphas=[1e-3, 1e-2, 1e-1, 1])
 hgb = HistGradientBoostingClassifier()
 per = Perceptron(tol=1e-3, random_state=0)
 pac = PassiveAggressiveClassifier(max_iter=50, random_state=42)
-occ = OutputCodeClassifier(estimator=RandomForestClassifier(random_state=0),random_state=42)
+occ = OutputCodeClassifier(
+    estimator=RandomForestClassifier(random_state=0), random_state=42
+)
 mlpc = MLPClassifier(random_state=42, max_iter=50)
 lgcv = LogisticRegressionCV(cv=5, random_state=42)
 lda = LinearDiscriminantAnalysis()
@@ -101,17 +104,15 @@ clfs = {
     "QuadraticDiscriminantAnalysis": qdc,
     "RandomForestClassifier": rfc,
     "RidgeClassifier": rc,
-    "RidgeClassifierCV": rcv, 
+    "RidgeClassifierCV": rcv,
     "Perceptron": per,
     "PassiveAgressiveClassifier": pac,
     "OutputCodeClassifier": occ,
-    "MLPClassifier" : mlpc,
-    "LogisticRegressionCV" : lgcv,
-    "LinearDiscriminantAnalysis" : lda,
-    "DummyClassifer" : dummy,
-
+    "MLPClassifier": mlpc,
+    "LogisticRegressionCV": lgcv,
+    "LinearDiscriminantAnalysis": lda,
+    "DummyClassifer": dummy,
 }
-
 
 
 def train_classifier_multiclass(clf, X_train, y_train, X_test, y_test):
@@ -216,8 +217,6 @@ def results_binary(X_train, X_test, y_train, y_test):
         }
     )
     print(performance_df)
-
-
 
 
 def process(X_train, X_test, y_train, y_test, classification_type):

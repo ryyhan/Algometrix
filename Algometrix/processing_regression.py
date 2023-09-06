@@ -165,7 +165,7 @@ def results(X_train, X_test, y_train, y_test):
             current_msle,
             current_med_ae,
         ) = train_regressor(reg, X_train, y_train, X_test, y_test)
-        
+
         r2_scores.append(current_r2)
         mse.append(current_mse)
         rmse.append(current_rmse)
