@@ -34,6 +34,7 @@ from sklearn.linear_model import Ridge
 from sklearn.linear_model import TheilSenRegressor
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
 models = [
@@ -190,6 +191,6 @@ def results(X_train, X_test, y_train, y_test):
             "MedAE": med_ae,
         }
     )
-    #print(performance_df)
+    # print(performance_df)
 
     return performance_df

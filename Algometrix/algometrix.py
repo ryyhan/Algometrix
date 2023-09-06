@@ -16,10 +16,9 @@ def algometrix(
     metrics="none",
     cross_validation=False,
 ):
-    return(algorithm_selection(
+    return algorithm_selection(
         X_train, X_test, y_train, y_test, prob_type, algorithms, classification_type
-    ))
-
+    )
 
 
 def algorithm_selection(
@@ -28,7 +27,9 @@ def algorithm_selection(
     prob_type = Ptype(prob_type)
 
     if prob_type == "reg":
-        return(validation(X_train, X_test, y_train, y_test, algorithms))
-    
+        return validation(X_train, X_test, y_train, y_test, algorithms)
+
     elif prob_type == "class":
-        return(classification_models(X_train, X_test, y_train, y_test, algorithms, classification_type))
+        return classification_models(
+            X_train, X_test, y_train, y_test, algorithms, classification_type
+        )

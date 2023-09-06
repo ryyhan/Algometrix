@@ -7,6 +7,8 @@ def regression_models(X_train, X_test, y_train, y_test, algorithms):
     validation(X_train, X_test, y_train, y_test, algorithms)
 
 """
+
+
 def validation(X_train, X_test, y_train, y_test, algorithms):
     if not (isinstance(algorithms, list) or algorithms == "all"):
         raise TypeError("Parameter should be a list or 'all'")
@@ -14,6 +16,6 @@ def validation(X_train, X_test, y_train, y_test, algorithms):
         if not (set(algorithms).issubset(set(models))):
             raise TypeError("All elements of 'algorithms' are not in 'models'.")
         elif algorithms == "all":
-            return (results(X_train, X_test, y_train, y_test))
+            return results(X_train, X_test, y_train, y_test)
     else:
-        return (results(X_train, X_test, y_train, y_test))
+        return results(X_train, X_test, y_train, y_test)
