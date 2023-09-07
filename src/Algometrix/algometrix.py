@@ -11,9 +11,9 @@ def algometrix(
     y_train,
     y_test,
     prob_type="none",
-    classification_type="none",
-    algorithms="none",
-    metrics="none",
+    classification_type="None",
+    algorithms="all",
+    metrics="all",
     cross_validation=False,
 ):
     return algorithm_selection(
