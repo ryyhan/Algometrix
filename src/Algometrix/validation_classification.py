@@ -1,4 +1,4 @@
-from processing_classification import process
+from .processing_classification import process
 import numpy as np
 import pandas as pd
 
@@ -10,7 +10,7 @@ def classification_models(
 """
 
 
-def validation(X_train, X_test, y_train, y_test, algorithms, classification_type):
+def validation_class(X_train, X_test, y_train, y_test, algorithms, classification_type):
     if not (isinstance(algorithms, list) or algorithms == "all") and not (
         classification_type == "binary" or classification_type == "multi"
     ):
@@ -23,6 +23,6 @@ def validation(X_train, X_test, y_train, y_test, algorithms, classification_type
         elif algorithms == "all" and (
             classification_type == "binary" or classification_type == "multi"
         ):
-            return process(X_train, X_test, y_train, y_test)
+            return process(X_train, X_test, y_train, y_test, classification_type)
     else:
-        return process(X_train, X_test, y_train, y_test)
+        return process(X_train, X_test, y_train, y_test, classification_type)

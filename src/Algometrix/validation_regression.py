@@ -1,4 +1,4 @@
-from processing_regression import results
+from .processing_regression import results
 import numpy as np
 import pandas as pd
 
@@ -9,7 +9,7 @@ def regression_models(X_train, X_test, y_train, y_test, algorithms):
 """
 
 
-def validation(X_train, X_test, y_train, y_test, algorithms):
+def validation_reg(X_train, X_test, y_train, y_test, algorithms):
     if not (isinstance(algorithms, list) or algorithms == "all"):
         raise TypeError("Parameter should be a list or 'all'")
 
