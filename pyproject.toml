@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "Algometrix"
+version = "0.0.1"
+authors = [
+  { name="Rehan Khan", email="dayel.rehan@gmail.com" },
+]
+description = "Algometrix: Your Comprehensive Machine Learning Model Comparison Tool. Easily assess and compare the performance of over 22 classification and 27 regression algorithms across 14 evaluation metrics for both classification and regression problems. Make data-driven decisions to select the best model for your dataset."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: AGPL (Affero General Public License)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ryyhan/Algometrix"
+"Bug Tracker" = "https://github.com/ryyhan/Algometrix"
