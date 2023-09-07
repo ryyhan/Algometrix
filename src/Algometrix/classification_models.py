@@ -1,4 +1,4 @@
-from processing_classification import process
+from .processing_classification import process
 import numpy as np
 import pandas as pd
 

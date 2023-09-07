@@ -1,4 +1,4 @@
-from processing_regression import results
+from .processing_regression import results
 import numpy as np
 import pandas as pd
 

@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from problem_types import Ptype
-from validation_regression import validation
-from validation_classification import classification_models
+from .problem_types import Ptype
+from .validation_regression import validation_reg
+from .validation_classification import validation_class
 
 
 def algometrix(
@@ -27,9 +27,9 @@ def algorithm_selection(
     prob_type = Ptype(prob_type)
 
     if prob_type == "reg":
-        return validation(X_train, X_test, y_train, y_test, algorithms)
+        return validation_reg(X_train, X_test, y_train, y_test, algorithms)
 
     elif prob_type == "class":
-        return classification_models(
+        return validation_class(
             X_train, X_test, y_train, y_test, algorithms, classification_type
         )
